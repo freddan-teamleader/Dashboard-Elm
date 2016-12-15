@@ -35,13 +35,15 @@ import {Im} from "../../../elm/Im.elm"
 		render() {
 			const GUI = Dashboard.GUI
 
+			const app = this
+
 			const setupPorts = ports => {
 				this.updateCounter = ports.counter.send
 				ports.output.subscribe(function(data) {
 					alert(data)
-//					this.setStates({
-//						items: data
-//					})
+					app.setState({
+						items: data
+					})
 				});
 			}
 
