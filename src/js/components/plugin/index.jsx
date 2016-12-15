@@ -4,8 +4,6 @@
 |--------------------------------------------------------------------------
 |
 | Welcome to your plugin.
-| Documentation can be found at https://github.com/Infomaker/Dashboard-Plugin/wiki.
-| Report bugs or leave feedback (about plugins or the Dashboard) at https://github.com/Infomaker/Dashboard-Plugin/issues.
 |
 */
 import Elm from 'react-elm-components'
@@ -16,7 +14,7 @@ import {Im} from "../../../elm/Im.elm"
 	 * Create an Application by extending the Application class
 	 * Read more about Application (https://github.com/Infomaker/Dashboard-Plugin/wiki/Application)
 	*/
-	class Application extends Dashboard.Application {
+	class ChatApplication extends Dashboard.Application {
 		constructor(props) {
 			super(props)
 
@@ -30,34 +28,39 @@ import {Im} from "../../../elm/Im.elm"
 
 		handleChange() {
 			if (typeof this.updateCounter === "function") {
-				this.updateCounter(1);
+				this.updateCounter(66)
 			}
 		}
 
 		render() {
-			// Get the GUI Library from Dashboard.GUI (https://github.com/Infomaker/Dashboard-Plugin/wiki/GUI-Library)
 			const GUI = Dashboard.GUI
-
-			const flags = 'wss://echo.websocket.org'
 
 			const setupPorts = ports => {
 				this.updateCounter = ports.counter.send
-				ports.output.subscribe(function(messageFromElm) {
-					alert(messageFromElm);
+				ports.output.subscribe(function(data) {
+					alert(data)
+//					this.setStates({
+//						items: data
+//					})
 				});
 			}
 
-			function results() {
+			let { items = [] } = this.state
+			const results = items.map(item => {
+				return {
+					id: Dashboard.createUUID(),
+					content: item
+				}
+			})
 
-			}
 
 			return (
 				// Use @plugin_bundle_class and the bundle in the manifest will be used as your class
 				<GUI.Wrapper className="@plugin_bundle_class">
 					<GUI.Title text={this.state.config.pluginTitle || "Chat"}/>
 					<GUI.Button text="My button" onClick={this.handleChange} />
-					<GUI.List items={results()}/>
-					<Elm src={Im} flags={flags} ports={setupPorts} />
+					<GUI.List items={results}/>
+					<Elm src={Im} flags={""} ports={setupPorts} />
 				</GUI.Wrapper>
 			)
 		}
@@ -105,7 +108,7 @@ import {Im} from "../../../elm/Im.elm"
 		bundle: "@plugin_bundle",
 
 		// Only of of these are actually required. If you are developing a widget, just remove the application and agent.
-		application: Application,
+		application: ChatApplication,
 		agent: Agent,
 
 		// Settings is optional.
