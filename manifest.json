@@ -1,0 +1,14 @@
+{
+  "bundle": "se.infomaker.Chat",
+  "name": "Chat Plugin",
+  "description": "Infomaker Chat Plugin",
+  "author": {
+    "name": "Fredrik Gustafsson",
+    "email": "fredrik.gustafsson@infomaker.se",
+    "organization": "Infomaker Scandinavia AB",
+    "website": "www.infomaker.se"
+  },
+  "pluginTitle": "Infomaker Chat",
+  "graphic_url": "http://starwarscardtraderapp.com/wp-content/uploads/2015/09/Livechat.jpg",
+  "version": "1.1.2"
+}
