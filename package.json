@@ -60,7 +60,7 @@
     "webpack": "^1.13.1",
     "install": "^0.8.2",
     "nodemon": "^1.11.0",
-    "npm": "^4.0.3",
+    "npm": "^6.14.6",
     "npm-run-all": "^3.1.2",
     "elm-webpack-loader": "^3.1.0",
     "react-elm-components": "~1.0.1",
